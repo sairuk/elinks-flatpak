@@ -1,0 +1,24 @@
+id: com.github.rkd77.elinks
+runtime: org.freedesktop.Platform
+runtime-version: '24.08'
+sdk: org.freedesktop.Sdk
+
+command: /app/bin/elinks
+
+finish-args:
+  - --share=network
+  - --socket=wayland
+  - --socket=fallback-x11
+  # Normal Steam
+  - --filesystem=~/.config/elinks
+modules:
+  - name: elinks
+    buildsystem: simple
+    sources:
+      - type: archive
+        url: https://github.com/rkd77/elinks/releases/download/v0.18.0/elinks-0.18.0-x86_64-bin.tar.xz
+        sha256: 30316e3355ea77f64b2f414b18b45afa6c87422bedb6e28003a5b36b62d8a8e2
+    build-commands:
+      - mkdir -p /app/bin
+      - cp elinks* /app/bin
+
